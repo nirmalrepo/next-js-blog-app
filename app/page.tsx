@@ -2,20 +2,23 @@
 
 import { SanityDocument } from "next-sanity";
 import { draftMode } from "next/headers";
-
-import Posts from "@/components/Posts";
-import PostsPreview from "@/components/PostsPreview";
 import { loadQuery } from "@/sanity/lib/store";
-import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { HOME_PAGE_QUERY } from "@/sanity/lib/queries";
+import PostPreview from "@/components/PostPreview";
+import Post from "@/components/Post";
 
 export default async function Page() {
-  const initial = await loadQuery<SanityDocument[]>(POSTS_QUERY, {}, {
-    perspective: draftMode().isEnabled ? "previewDrafts" : "published",
-  });
+  const initial = await loadQuery<SanityDocument>(
+    HOME_PAGE_QUERY,
+    { slug: "home-page" },
+    {
+      perspective: draftMode().isEnabled ? "previewDrafts" : "published",
+    }
+  );
 
   return draftMode().isEnabled ? (
-    <PostsPreview initial={initial} />
+    <PostPreview initial={initial} params={{ slug: "home-page" }} />
   ) : (
-    <Posts posts={initial.data} />
-  )
+    <Post post={initial.data} />
+  );
 }

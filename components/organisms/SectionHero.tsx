@@ -14,7 +14,7 @@ export default function SectionHero({
   image,
 }: SectionHeroProps) {
   return (
-    <section className="hero bg-cover bg-center py-16">
+    <section className="hero bg-cover bg-center py-16 t-section">
       <div className="flex flex-wrap max-w-screen-xl mx-auto">
         <div className="w-full sm:w-1/2 mb-10">
           <div className="container mx-auto h-full sm:p-10">

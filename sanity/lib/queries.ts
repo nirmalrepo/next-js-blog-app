@@ -18,3 +18,15 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
     ${SectionIntroductionFragment}
   }
 }`;
+
+export const HOME_PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0]{
+    title,
+    slug,
+    mainImage,
+    "sections": sections[]{
+    _type,
+    ${SectionHeroFragment},
+    ${SectionContentFragment},
+    ${SectionIntroductionFragment}
+  }
+}`;
