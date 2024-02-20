@@ -1,37 +1,47 @@
 import React from "react";
 import Image from "next/image";
 import { urlFor } from "@/lib/utils/helpers";
+import { PortableText } from "@portabletext/react";
 
-interface SectionHeroProps {
+interface SectionTextImageProps {
   heading?: string;
-  tagLine?: string;
-  image: object;
+  content?: any;
+  image: any;
 }
 
-export default function SectionHero({
+export default function SectionTextImage({
   heading,
-  tagLine,
+  content,
   image,
-}: SectionHeroProps) {
+}: SectionTextImageProps) {
+  const isImageOnLeft = image.alignment === "left";
   return (
     <section className="hero bg-cover bg-center py-16 t-section">
       <div className="flex flex-wrap max-w-screen-xl mx-auto">
-        <div className="w-full sm:w-1/2 mb-10">
+        <div
+          className={`w-full sm:w-1/2 mb-10 ${
+            isImageOnLeft ? "order-last" : "order-first"
+          }`}
+        >
           <div className="container mx-auto h-full sm:p-10">
             <header className="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
               <div className="w-full p-16">
-                <h1 className="text-4xl lg:text-6xl font-bold font-overpass leading-6 mb-4">
+                <h2 className="text-xl lg:text-4xl font-bold font-overpass leading-6 mb-4">
                   {heading}
-                </h1>
-                <p className="mb-10">{tagLine}</p>
-                <button className="bg-cream hover:bg-cream-300 px-6 py-2  rounded-full">
+                </h2>
+                <PortableText value={content.content} components={{}} />
+                <button className="bg-cream hover:bg-cream-300 px-6 py-2 rounded-full mt-10">
                   Learn More
                 </button>
               </div>
             </header>
           </div>
         </div>
-        <div className="w-full sm:w-1/2 mb-10 relative">
+        <div
+          className={`w-full sm:w-1/2 mb-10 relative ${
+            isImageOnLeft ? "order-first" : "order-last"
+          }`}
+        >
           {image ? (
             <Image
               className="inset-0 object-cover"
@@ -48,6 +58,6 @@ export default function SectionHero({
 
 export const fragment = `
   heading,
-  tagLine,
+  content,
   image
 `;

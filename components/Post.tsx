@@ -2,8 +2,8 @@ import { SanityDocument } from "next-sanity";
 import ComponentRegistry from "./ComponentRegistry";
 
 export default function Post({ post }: { post: SanityDocument }) {
-  const { title, mainImage, sections } = post;
-  console.log(post);
+  const { sections } = post;
+
   return (
     <main className="container-fluid mx-auto prose prose-lg">
       {sections.map((section: any, index: number) => {

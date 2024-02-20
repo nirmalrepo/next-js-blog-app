@@ -13,7 +13,9 @@ const ComponentRegistry: ComponentRegistryType = {
   sectionContent: dynamic(
     () => import("@/components/organisms/SectionContent")
   ),
-  // Add more mappings for other section types
+  sectionTextImage: dynamic(
+    () => import("@/components/organisms/SectionTextImage")
+  ),
 };
 
 export default ComponentRegistry;
